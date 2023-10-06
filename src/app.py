@@ -14,25 +14,6 @@ def index():
     return render_template('index.html')
 
 
-#Validación de usuario
-@app.route('/login', methods = ['POST'])
-def login():
-    # Obtener datos del formulario
-    usuario = request.form['usuario']
-    password = request.form['password']
-    
-    # Realizar la búsqueda en la base de datos para verificar la autenticación
-    usuarios = con_bd['Usuarios']
-    user_data = usuarios.find_one({"usuario": usuario,"password": password})
-    
-    if user_data:
-        # Autenticación exitosa, redirigir a una página de éxito
-
-        return render_template('inicio.html', usuario=usuario)
-    else:
-        # Autenticación fallida, mostrar un mensaje de error
-        return "Error de autenticación"
-
 # Crear usuario
 @app.route('/registro')
 def registro():
@@ -57,6 +38,30 @@ def agregarUser():
         return redirect(url_for('registro'))
     else:
         return "Error"
+
+@app.route('/login')
+def login():
+    # Lógica para mostrar la página de inicio de sesión
+    return render_template('login.html')
+
+#Validación de usuario
+@app.route('/validar', methods = ['POST'])
+def validar():
+    # Obtener datos del formulario
+    usuario = request.form['usuario']
+    password = request.form['password']
+    
+    # Realizar la búsqueda en la base de datos para verificar la autenticación
+    usuarios = con_bd['Usuarios']
+    user_data = usuarios.find_one({"usuario": usuario,"password": password})
+    
+    if user_data:
+        # Autenticación exitosa, redirigir a una página de éxito
+
+        return render_template('inicio.html', usuario=usuario)
+    else:
+        # Autenticación fallida, mostrar un mensaje de error
+        return "Error de autenticación, Contraseña incorrecta"
 
 
 
