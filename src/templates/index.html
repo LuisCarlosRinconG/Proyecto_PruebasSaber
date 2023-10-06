@@ -1,57 +1,84 @@
-<!--
-    Para inspeccionar alguna pagina como formato html se puede hacer con:
-    ctrl + u
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/Estilos.css')}}">
+    <link rel="shortcut icon" href="/static/img/Ima1.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
+    <title>SOFTWARE DE GESTIÓN Y COMUNICACIÓN</title>
 </head>
 <body>
-    <h1>BIENVENIDO</h1>
-    <h2>Login</h2>
-    <a href="src\templates\login.html">ingresar</a>
-
-
-    <h2>* Registro </h2>
-    <form action = "/guardar_usuarios" method = "post">
-        <input type = "text" name = "usuario">
-        <input type = "text" name = "roll">
-        <input type = "text" name = "password">
-        <button type = "submit">Guardar</button>
-
-    </form>
-
-    <h2>* Visualización de datos </h2>
+    <header>
+        <nav>
+            <a href="login">Ingresar</a>
+            <a href="registro">Registrar</a> 
+        </nav>
+        <section class="textos-header">
+            <h1>Plataforma de gestión y comunicación de desarrollo de software</h1>
+            <h2>Gestiona tus proyectos de desarrollo de software facilmente</h2>
+        </section>
+        <div class="wave" style="height: 150px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M0.00,50.10 C187.36,208.58 349.20,-50.10 500.00,50.10 L500.00,150.33 L0.00,150.33 Z" style="stroke: none; fill: #fff;"></path></svg></div>
     
-    <!--
-        Se utiliza jinja2 para hacer la visualización y correspondiente actualización de los datos mediante un for que recorra todas nuestras colecciones
-    -->
-
-    {%for user in usuarios %}
-    <!-- Se añade un criterio de busqueda el cual va a ser nombre por medio de jinja2 para actualizar por medio de llamar el objeto con su parametro correspondiente de app.py-->
-    <form action="/editar_usuarios/{{ user.usuario }}" method="post">
-        <input type="text" name="usuario" value="{{user.usuario}}">
-        <input type="text" name="roll" value="{{user.roll}}">
-        <input type="text" name="password" value="{{user.password}}">
-        <button type="submit">Actualizar</button>
-        <!--Con la etiqueta de enlace y llamando al metodo eliminar se crea un acceso capaz de eliminar el registro-->
-        <!--Se añade javaScript para mandar un mensaje de alerta-->
-        <a href="{{url_for('eliminar', usuario_user=user.usuario)}}"onclick="return confirm('¿Esta seguro de eliminar el usuario {{user.usuario}}? ')">Eliminar</a>
-        <hr>
-    </form>
-    {%endfor%}
-
-    <h2>* Login </h2>
-    <form action = "/validar" method = "post">
-        <input type = "text" name = "usuario">
-        <input type = "text" name = "roll">
-        <input type = "text" name = "password">
-        <button type = "submit">ingresar</button>
-
-    </form>
-    
+    </header>
+    <main>
+        <section class="contenedor sobre-nosotros">
+            <h2 class="titulo">Nuestro Producto</h2>
+            <div class="contenedor-sobre-nosotros">
+                <img src="static/img/Ima2.png" alt="" class="imagen-about-us">
+                <div class="contenido-textos">
+                    <h3><span>1</span>Gestión de proyectos</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi iste deleniti odit minus ut temporibus, harum impedit commodi voluptate asperiores, itaque alias sunt eum necessitatibus qui praesentium dolores aperiam mollitia?</p>
+                    <h3><span>2</span>Comunicación entre equipos</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi iste deleniti odit minus ut temporibus, harum impedit commodi voluptate asperiores, itaque alias sunt eum necessitatibus qui praesentium dolores aperiam mollitia?</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="clientes contenedor">
+            <h2 class="titulo">desarrolladores</h2>
+            <div class="cards">
+                <div class="card">
+                    <img src="static/img/Imac.jpg" alt="">
+                    <div class="contenido-texto-card">
+                        <h4>Cristian Chiguasuque</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, delectus.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="static/img/Imaj.jpg" alt="">
+                    <div class="contenido-texto-card">
+                        <h4>Jeison Polanco</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, delectus.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="static/img/Imal.jpg" alt="">
+                    <div class="contenido-texto-card">
+                        <h4>Luis Rincón</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, delectus.</p>
+                    </div>
+                </div>
+            </div> 
+        </section>
+    </main>
+    <footer>
+        <div class="contenedor-footer">
+            <div class="content-foo">
+                <h4>Phone</h4>
+                <p>3013707162</p>
+            </div>
+            <div class="content-foo">
+                <h4>Email</h4>
+                <p>udesoft@outlook.com</p>
+            </div>
+            <div class="content-foo">
+                <h4>location</h4>
+                <p>Villa De San Diego De Ubaté</p>
+            </div>
+        </div>
+        <h2 class="titulo-final">&copy; Universidad De Cundinamarca | Facultad De Ingenieria</h2>
+    </footer>
 </body>
 </html>

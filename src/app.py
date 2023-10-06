@@ -8,12 +8,38 @@ con_bd = Conexion()
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
+    return render_template('index.html')
+
+
+#Validación de usuario
+@app.route('/login', methods = ['POST'])
+def login():
+    # Obtener datos del formulario
+    usuario = request.form['usuario']
+    password = request.form['password']
+    
+    # Realizar la búsqueda en la base de datos para verificar la autenticación
+    usuarios = con_bd['Usuarios']
+    user_data = usuarios.find_one({"usuario": usuario,"password": password})
+    
+    if user_data:
+        # Autenticación exitosa, redirigir a una página de éxito
+
+        return render_template('inicio.html', usuario=usuario)
+    else:
+        # Autenticación fallida, mostrar un mensaje de error
+        return "Error de autenticación"
+
+# Crear usuario
+@app.route('/registro')
+def registro():
     # Se modifica la vista index para poder hacer el muestreo de los datos
     usuarios = con_bd['Usuarios']
     UsuariosRegistradas=usuarios.find()
-    return render_template('index.html', usuarios = UsuariosRegistradas)
+    return render_template('registro.html', usuarios = UsuariosRegistradas)
 
 
 # Ruta para guardar los datos de la DB
@@ -28,11 +54,32 @@ def agregarUser():
         user = User(usuario, roll, password)
         #insert_one para crear un documento en Mongo
         usuarios.insert_one(user.formato_doc())
-        return redirect(url_for('index'))
+        return redirect(url_for('registro'))
     else:
         return "Error"
-    
 
+
+
+if __name__ == '__main__':
+    app.run(debug = True, port = 2001)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+'''
 # En este caso se eliminara atravez de la URL
 # Ruta para eliminar datos en la DB donde la ruta se llama eliminar_persona y recibe un parametro llamado nombre_persona
 @app.route('/eliminar_usuarios/<string:usuario_user>')
@@ -41,7 +88,7 @@ def eliminar(usuario_user):
     # Se hace uso de delete_one para borrar los datos de la DB personas donde el dato que se elimina es el que se para como argumento para nombre
     usuarios.delete_one({ 'usuario': usuario_user})
     # Creamos un redireccionamiento que redirija a la vista index
-    return redirect(url_for('index'))
+    return redirect(url_for('registro'))
 
 #Editar o actualizar el contenido 
 @app.route('/editar_usuarios/<string:usuario_user>', methods = ['POST'])
@@ -55,40 +102,8 @@ def editar(usuario_user):
     if usuario and roll and password:
         usuarios.update_one({'usuario': usuario_user}, 
                             {'$set': {'usuario' : usuario , 'roll': roll, 'password': password}}) # update_one() necesita de al menos dos parametros para funcionar
-        return redirect(url_for('index'))
-    else:
-        return "Error de actualización"
-    
-
-
-#Validación 
-@app.route('/validar', methods = ['POST'])
-def validar():
-    usuarios = con_bd['Usuarios']
-    # Se realiza el mismo proceso de inserción y extracción para poder actualizar los datos
-    usuario = request.form['usuario']
-    roll = request.form['roll']
-    password = request.form['password']
-    
-    # Obtén una referencia a la colección "usuarios"
-    usuarios = con_bd.Usuarios
-
-    # Define una proyección para obtener solo la columna "nombre"
-    proyeccion = {"usuario": 1, "_id": 0}  # El valor 1 indica que deseas incluir este campo, el valor 0 indica que no deseas incluir el campo "_id"
-
-    # Realiza la búsqueda y obtén el cursor
-    vusuario = usuarios.find({}, proyeccion)
-
-    # Itera a través del cursor para obtener los documentos
-    for usuario in vusuario:
-        nombre = usuario.get("usuario", "Nombre no encontrado")
-        print(nombre)
-
-    if usuario==vusuario:
-        return render_template('login.html')
+        return redirect(url_for('registro'))
     else:
         return "Error de actualización"
 
-
-if __name__ == '__main__':
-    app.run(debug = True, port = 2001)
+'''
