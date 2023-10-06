@@ -1,11 +1,57 @@
+<!--
+    Para inspeccionar alguna pagina como formato html se puede hacer con:
+    ctrl + u
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Registro</title>
 </head>
 <body>
+    <h1>BIENVENIDO</h1>
+    <h2>Login</h2>
+    <a href="src\templates\login.html">ingresar</a>
+
+
+    <h2>* Registro </h2>
+    <form action = "/guardar_usuarios" method = "post">
+        <input type = "text" name = "usuario">
+        <input type = "text" name = "roll">
+        <input type = "text" name = "password">
+        <button type = "submit">Guardar</button>
+
+    </form>
+
+    <h2>* Visualización de datos </h2>
+    
+    <!--
+        Se utiliza jinja2 para hacer la visualización y correspondiente actualización de los datos mediante un for que recorra todas nuestras colecciones
+    -->
+
+    {%for user in usuarios %}
+    <!-- Se añade un criterio de busqueda el cual va a ser nombre por medio de jinja2 para actualizar por medio de llamar el objeto con su parametro correspondiente de app.py-->
+    <form action="/editar_usuarios/{{ user.usuario }}" method="post">
+        <input type="text" name="usuario" value="{{user.usuario}}">
+        <input type="text" name="roll" value="{{user.roll}}">
+        <input type="text" name="password" value="{{user.password}}">
+        <button type="submit">Actualizar</button>
+        <!--Con la etiqueta de enlace y llamando al metodo eliminar se crea un acceso capaz de eliminar el registro-->
+        <!--Se añade javaScript para mandar un mensaje de alerta-->
+        <a href="{{url_for('eliminar', usuario_user=user.usuario)}}"onclick="return confirm('¿Esta seguro de eliminar el usuario {{user.usuario}}? ')">Eliminar</a>
+        <hr>
+    </form>
+    {%endfor%}
+
+    <h2>* Login </h2>
+    <form action = "/validar" method = "post">
+        <input type = "text" name = "usuario">
+        <input type = "text" name = "roll">
+        <input type = "text" name = "password">
+        <button type = "submit">ingresar</button>
+
+    </form>
     
 </body>
 </html>
