@@ -1,21 +1,96 @@
-body{
+body {
     background-color: white;
     margin: 0;
     padding: 0;
-    max-width: 100%;
+    box-sizing: border-box;
+    display: block;
+    flex-direction: column;
+}
+.background-radial-gradient {
+    background-size: 100%;
+    background-color: hsl(270, 50%, 20%); 
+    background-image: radial-gradient(650px circle at 0% 0%,
+        hsl(270, 50%, 40%) 15%,
+        hsl(270, 50%, 30%) 35%, 
+        hsl(270, 50%, 20%) 75%, 
+        hsl(270, 50%, 19%) 80%, 
+        transparent 100%),
+    radial-gradient(1250px circle at 100% 100%,
+        hsl(270, 50%, 60%) 15%, 
+        hsl(270, 50%, 40%) 35%, 
+        hsl(270, 50%, 30%) 75%, 
+        hsl(270, 50%, 29%) 80%, 
+        transparent 100%);
+    margin: 0;
+    padding: 0; 
 }
 
-/* Estilo para el contenedor principal */
-.container-fluid {
+.bg-glass {
+    background-color: hsla(0, 0%, 100%, 0.9) !important;
+    backdrop-filter: saturate(200%) blur(25px);
+}
+
+.h3 {
+    font-size: 25px;
+    text-align: center;
+}
+
+footer{
+    background: #414141;
+    padding: 60px 0 30px 0;
+    margin: auto;
+    overflow: hidden;
+}
+
+.contenedor-footer{
     display: flex;
+    width: 90%;
+    justify-content: space-evenly;
+    margin: auto;
+    padding-bottom: 50px;
+    border-bottom: 1px solid #ccc;
+}
+
+.content-foo{
+    text-align: center;
+}
+
+.content-foo h4{
+    color: #fff;
+    border-bottom: 3px solid #af20d3;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.content-foo p{
+    color: #ccc;
+}
+
+.titulo-final{
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0 0 0;
+    color: #9e9797;
+}
+
+/* Estilo para el contenedor principal 
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
     justify-content: center;
     align-items: center;
-    height: 200vh;
+    max-width: 100%; 
+    padding: 20px;
+    box-sizing: border-box; 
+    height: 100%;
 }
 
-/* Estilo para el contenedor del formulario de inicio de sesión */
-.registro {
-    background-color: #f8f9fa;
+/* Estilo para el contenedor del formulario de inicio de sesión 
+.registro, .login {
+    background-color: #4d0686;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
@@ -23,7 +98,7 @@ body{
     width: 100%;
 }
 
-/* Estilo para el formulario */
+/* Estilo para el formulario 
 form {
     background-color: #f8f9fa;
     padding: 20px;
@@ -33,18 +108,20 @@ form {
     width: 100%;
 }
 
-/* Estilo para el título del formulario */
+
+/* Estilo para el título del formulario 
 .h3 {
-    font-size: 24px;
+    color: white;
+    font-size: 25px;
     text-align: center;
 }
 
-/* Estilo para las etiquetas del formulario */
+/* Estilo para las etiquetas del formulario 
 .form-label {
     font-weight: bold;
 }
 
-/* Estilo para los campos de entrada */
+/* Estilo para los campos de entrada 
 .form-control {
     margin-bottom: 10px;
     padding: 10px;
@@ -52,7 +129,7 @@ form {
     border-radius: 5px;
 }
 
-/* Estilo para el botón de rol */
+/* Estilo para el botón de rol 
 .rol button {
     width: 100%;
     background-color: #28a745;
@@ -62,18 +139,18 @@ form {
     cursor: pointer;
 }
 
-/* Estilo para la lista desplegable de roles */
+/* Estilo para la lista desplegable de roles 
 .dropdown-menu {
     background-color: #f8f9fa;
 }
 
-/* Estilo para los elementos de la lista desplegable */
+/* Estilo para los elementos de la lista desplegable 
 .dropdown-item {
     color: #333;
     font-weight: bold;
 }
 
-/* Estilo para el botón de registro */
+/* Estilo para el botón de registro 
 .btn-primary {
     background-color: #007bff;
     color: white;
@@ -82,12 +159,12 @@ form {
     cursor: pointer;
 }
 
-/* Estilo para el pie de página */
+/* Estilo para el pie de página 
 .text-body-secondary {
     text-align: center;
 }
 
-/* Estilo para el enlace de registro */
+/* Estilo para el enlace de registro 
 .btn-link {
     text-align: center;
     display: block;
@@ -97,4 +174,4 @@ form {
 
 .btn-link:hover {
     text-decoration: underline;
-}
+}*/

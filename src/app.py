@@ -63,9 +63,22 @@ def validar():
         # Autenticación fallida, mostrar un mensaje de error
         return "Error de autenticación, Contraseña incorrecta"
 
+# Ruta de usuario
+@app.route('/usuario')
+def usuario():
+    return render_template('usuario.html')
 
+# Ruta de administrador
+@app.route('/admin')
+def admin():
+    return render_template('admin.html') 
+
+# Ruta de error 404
+def error_404(error):
+    return render_template('error_404.html'), 404
 
 if __name__ == '__main__':
+    app.register_error_handler(404, error_404)
     app.run(debug = True, port = 2001)
 
 
