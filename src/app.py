@@ -1,7 +1,7 @@
 from flask import Flask, redirect, render_template, request, url_for
 from config import *
 from user import User
-
+from admin import Admin
 
 # Instancias para realizar operaciones con la DB
 con_bd = Conexion()
@@ -76,14 +76,46 @@ def validar():
 def usuario():
     return render_template('usuario.html')
 
-# Ruta de administrador
-@app.route('/admin')
-def admin():
-    return render_template('admin.html') 
-
 # Ruta de error 404
 def error_404(error):
     return render_template('error_404.html'), 404
+
+
+# Ruta de administrador
+@app.route('/admin')
+def admin():
+    acividades = con_bd['Actividades']
+    ActividadesRegistradas=acividades.find()
+    return render_template('admin.html', acividades = ActividadesRegistradas)
+
+# Ruta para guardar los datos de la actividades de la DB
+@app.route('/agregarActividad', methods = ['POST'])
+def agregarActividad():
+    acividades = con_bd['Actividades']
+    actividad= request.form['actividad']
+    descripcion = request.form['descripcion']
+    equipo = request.form['equipo']
+    fechaI = request.form['fechaI']
+    fechaF = request.form['fechaF']
+    estado = request.form['estado']
+    comentarios=request.form['comentarios']
+
+    if actividad and descripcion and equipo and fechaI and fechaF and estado and comentarios:
+        admin = Admin(actividad, descripcion, equipo, fechaI, fechaF, estado, comentarios)
+        #insert_one para crear un documento en Mongo
+        acividades.insert_one(admin.formato_doc())
+        return redirect(url_for('admin'))
+    else:
+        return "Error"
+
+#Ruta para la pantalla de datos donde se muestra la data consultada
+@app.route('/fechaBuscada',methods = ['POST'])
+def Read():
+    actividades = con_bd['Actividades']
+    fechabuscada = request.form['fechaI']
+    query={"fechaI":fechabuscada}
+    AcividadesRegistradas=actividades.find(query)
+    return render_template('datos.html', actividades = AcividadesRegistradas)
 
 if __name__ == '__main__':
     app.register_error_handler(404, error_404)
