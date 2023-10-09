@@ -48,42 +48,54 @@
     </div>
     
     <div class="datos">
-        <h2>Actividades</h2>
-        <form action = "/agregarActividad" method = "post">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th data-th="Actividad">Actividad</th>
-                        <th data-th="Descripción">Descripción</th>
-                        <th data-th="Equipo">Equipo</th>
-                        <th data-th="Fecha Inicio">Fecha Inicio</th>
-                        <th data-th="Fecha Final">Fecha Final</th>
-                        <th data-th="Estado">Estado</th>
-                        <th data-th="Comentarios">Comentarios</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="text" class="form-control" name="actividad"></td>
-                        <td><input type="text" class="form-control" name="descripcion"></td>
-                        <td><input type="text" class="form-control" name="equipo"></td>
-                        <td><input type="text" class="form-control" name="fechaI"></td>
-                        <td><input type="text" class="form-control" name="fechaF"></td>
-                        <td><input type="text" class="form-control" name="estado"></td>
-                        <td><input type="text" class="form-control" name="comentarios"></td>
-                        <td>
-                        <button type="submit" class="btn btn-secondary btn-sm">Enviar</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
-
-        <h3 class="titulo">Filtro de Actividades por fecha de inicio</h3>
-                            <form action = "/fechaBuscada" method = "post">
-                                <input type="text" name="fechaI" placeholder="DD-MM-AAAA">
-                                <button type = "submit">Buscar</button>
-                            </form>
+        <div class="container">
+            <h2>Actividades</h2>
+            <form class="registros" action="/agregarActividad" method="post">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead class="cabecera">
+                            <tr>
+                                <th data-th="Actividad">Actividad</th>
+                                <th data-th="Descripción">Descripción</th>
+                                <th data-th="Equipo">Equipo</th>
+                                <th data-th="Fecha Inicio">Fecha Inicio</th>
+                                <th data-th="Fecha Final">Fecha Final</th>
+                                <th data-th="Estado">Estado</th>
+                                <th data-th="Comentarios">Comentarios</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="cuerpo">
+                            <tr>
+                                <td><input class="input-field form-control" type="text" name="actividad"></td>
+                                <td><input class="input-field form-control" type="text" name="descripcion"></td>
+                                <td><input class="input-field form-control" type="text" name="equipo"></td>
+                                <td><input class="input-field form-control" type="text" name="fechaI"></td>
+                                <td><input class="input-field form-control" type="text" name="fechaF"></td>
+                                <td><input class="input-field form-control" type="text" name="estado"></td>
+                                <td><input class="input-field form-control" type="text" name="comentarios"></td>
+                                <td>
+                                    <button type="submit" class="btn btn-secondary btn-sm">Enviar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+        
+        <div class="container">
+            <div class="filtro-actividades">
+                <h3 class="titulo">Filtro de Actividades por fecha de inicio</h3>
+                <form action="/fechaBuscada" method="post" class="filtro-form">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="fechaI" placeholder="DD-MM-AAAA">
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br>
     </div>
 
     <footer>
