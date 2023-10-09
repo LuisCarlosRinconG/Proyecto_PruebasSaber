@@ -27,12 +27,15 @@ def registro():
 @app.route('/guardar_usuarios', methods = ['POST'])
 def agregarUser():
     usuarios = con_bd['Usuarios']
-    usuario = request.form['usuario']
-    roll = request.form['roll']
+    nombre = request.form['nombre']
+    email = request.form['email']
+    departamento = request.form['departamento']
+    cumple = request.form['cumple']
     password = request.form['password']
+    roll=' '
 
-    if usuario and roll and password:
-        user = User(usuario, roll, password)
+    if nombre and email and departamento and cumple and password and roll:
+        user = User(nombre, email, departamento, cumple, password, roll)
         #insert_one para crear un documento en Mongo
         usuarios.insert_one(user.formato_doc())
         return redirect(url_for('registro'))
@@ -48,17 +51,22 @@ def login():
 @app.route('/validar', methods = ['POST'])
 def validar():
     # Obtener datos del formulario
-    usuario = request.form['usuario']
+    email = request.form['email']
     password = request.form['password']
+    roll='Admin'
+    roll2='Usuario'
     
     # Realizar la búsqueda en la base de datos para verificar la autenticación
     usuarios = con_bd['Usuarios']
-    user_data = usuarios.find_one({"usuario": usuario,"password": password})
+    user_Admin = usuarios.find_one({"email": email,"password": password,"roll":roll})
+    user_Usuario = usuarios.find_one({"email": email,"password": password,"roll":roll2})
     
-    if user_data:
-        # Autenticación exitosa, redirigir a una página de éxito
+    if user_Admin:
 
-        return render_template('inicio.html', usuario=usuario)
+        return render_template('admin.html', email=email)
+    elif user_Usuario:
+
+        return render_template('usuario.html', email=email)
     else:
         # Autenticación fallida, mostrar un mensaje de error
         return "Error de autenticación, Contraseña incorrecta"
