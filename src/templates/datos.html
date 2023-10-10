@@ -64,13 +64,12 @@
                 <article>
                     <section class="zona_historico">
                         <h2 class="titulo">Actividades buscadas para la fecha</h2>
-                        
-                        <!--
-                            Se utiliza jinja2 para hacer la visualización y correspondiente actualización de los datos mediante un for que recorra todas nuestras colecciones
-                        -->
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
+                        {%for admin in actividades %}
+                        <form class="registros" action="/editar_actividad/{{admin.actividad}}" method="post">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead class="cabecera">
+                                    <tr>
                                     <th data-th="Actividad">Actividad</th>
                                     <th data-th="Descripción">Descripción</th>
                                     <th data-th="Equipo">Equipo</th>
@@ -78,19 +77,41 @@
                                     <th data-th="Fecha Final">Fecha Final</th>
                                     <th data-th="Estado">Estado</th>
                                     <th data-th="Comentarios">Comentarios</th>
+                                    <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    <tr>
+                                    <td><input class="input-field form-control" type="text" name="actividad" value="{{admin.actividad}}"></td>
+                                    <td><input class="input-field form-control" type="text" name="descripcion" value="{{admin.descripcion}}"></td>
+                                    <td>
+                                        <select class="input-field form-control" name="equipo">
+                                            <option value="desarrolladores" {% if admin.equipo == 'desarrolladores' %}selected{% endif %}>desarrolladores</option>
+                                            <option value="administradores de bases de datos" {% if admin.equipo == 'administradores de bases de datos' %}selected{% endif %}>administradores de bases de datos</option>
+                                            <option value="devops" {% if admin.equipo == 'devops' %}selected{% endif %}>devops</option>
+                                            <option value="analistas" {% if admin.equipo == 'analistas' %}selected{% endif %}>analistas</option>
+                                            <option value="Seguridad" {% if admin.equipo == 'Seguridad' %}selected{% endif %}>Seguridad</option>
+                                        </select>
+                                    </td>
+                                    <td><input class="input-field form-control" type="text" name="fechaI" value="{{admin.fechaI}}"></td>
+                                    <td><input class="input-field form-control" type="text" name="fechaF" value="{{admin.fechaF}}"></td>
+                                    <td>
+                                        <select class="input-field form-control" name="estado">
+                                            <option value="activo" {% if admin.estado == 'activo' %}selected{% endif %}>activo</option>
+                                            <option value="finalizado" {% if admin.estado == 'finalizado' %}selected{% endif %}>finalizado</option>
+                                            <option value="cancelado" {% if admin.estado == 'cancelado' %}selected{% endif %}>cancelado</option>
+                                        </select>
+                                    </td>
+                                    <td><input class="input-field form-control" type="text" name="comentarios" value="{{admin.comentarios}}"></td>
+                                    <td>
+                                        <button type="submit" class="btn btn-secondary btn-sm">Actualizar</button>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {%for admin in actividades %}
-                                <tr>
-                                    <td>{{admin.actividad}}</td>
-                                    <td>{{admin.descripcion}}</td>
-                                    <td>{{admin.equipo}}</td>
-                                    <td>{{admin.fechaI}}</td>
-                                    <td>{{admin.fechaF}}</td>
-                                    <td>{{admin.estado}}</td>
-                                    <td>{{admin.comentarios}}</td>
-                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
                                 {%endfor%}
                             </tbody>
                         </table>

@@ -53,8 +53,8 @@ def validar():
     # Obtener datos del formulario
     email = request.form['email']
     password = request.form['password']
-    roll='Admin'
-    roll2='Usuario'
+    roll='admin'
+    roll2='usuario'
     
     # Realizar la búsqueda en la base de datos para verificar la autenticación
     usuarios = con_bd['Usuarios']
@@ -116,6 +116,25 @@ def Read():
     query={"fechaI":fechabuscada}
     AcividadesRegistradas=actividades.find(query)
     return render_template('datos.html', actividades = AcividadesRegistradas)
+
+#Editar o actualizar el contenido de la actividad
+@app.route('/editar_actividad/<string:actividad_buscada>', methods = ['POST'])
+def editar(actividad_buscada):
+    acividades = con_bd['Actividades']
+    actividad= request.form['actividad']
+    descripcion = request.form['descripcion']
+    equipo = request.form['equipo']
+    fechaI = request.form['fechaI']
+    fechaF = request.form['fechaF']
+    estado = request.form['estado']
+    comentarios=request.form['comentarios']
+    # Utilizaremos la función update_one()
+    if actividad and descripcion and equipo and fechaI and fechaF and estado and comentarios:
+        acividades.update_one({'actividad': actividad_buscada}, 
+                            {'$set': {'actividad' : actividad, 'descripcion': descripcion, 'equipo': equipo,'fechaI' : fechaI, 'fechaF': fechaF, 'estado': estado, 'comentarios': comentarios}}) # update_one() necesita de al menos dos parametros para funcionar
+        return redirect(url_for('admin'))
+    else:
+        return "Error de actualización"
 
 if __name__ == '__main__':
     app.register_error_handler(404, error_404)

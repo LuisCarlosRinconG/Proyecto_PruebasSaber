@@ -69,10 +69,24 @@
                             <tr>
                                 <td><input class="input-field form-control" type="text" name="actividad"></td>
                                 <td><input class="input-field form-control" type="text" name="descripcion"></td>
-                                <td><input class="input-field form-control" type="text" name="equipo"></td>
+                                <td>
+                                    <select class="input-field form-control" name="equipo">
+                                      <option value="desarrolladores">desarrolladores</option>
+                                      <option value="administradores de bases de datos">administradores de bases de datos</option>
+                                      <option value="devops">devops</option>
+                                      <option value="analistas">analistas</option>
+                                      <option value="Seguridad">Seguridad</option>
+                                    </select>
+                                </td>
                                 <td><input class="input-field form-control" type="text" name="fechaI"></td>
                                 <td><input class="input-field form-control" type="text" name="fechaF"></td>
-                                <td><input class="input-field form-control" type="text" name="estado"></td>
+                                <td>
+                                    <select class="input-field form-control" name="estado">
+                                        <option value="activo">activo</option>
+                                        <option value="finalizado">finalizado</option>
+                                        <option value="cancelado">cancelado</option>
+                                    </select>
+                                </td>
                                 <td><input class="input-field form-control" type="text" name="comentarios"></td>
                                 <td>
                                     <button type="submit" class="btn btn-secondary btn-sm">Enviar</button>
