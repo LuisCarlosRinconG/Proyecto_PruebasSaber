@@ -60,27 +60,12 @@ def validar():
     usuarios = con_bd['Usuarios']
     user_Admin = usuarios.find_one({"email": email,"password": password,"roll":roll})
     user_Usuario = usuarios.find_one({"email": email,"password": password,"roll":roll2})
-    
+    buscador= usuarios.find_one({"departamento": 'desarrollador'})
     
     if user_Admin:
 
         return render_template('admin.html', email=email)
     elif user_Usuario:
-            equipo_usuario = user_Usuario.get("departamento", "")
-
-            if equipo_usuario:
-                actividades = con_bd['Actividades']
-                AcividadesRegistradas = actividades.find({"equipo": equipo_usuario})
-            return render_template('usuario.html', actividades=AcividadesRegistradas)
-        
-    else:
-        # Autenticación fallida, mostrar un mensaje de error
-        return "Error de autenticación, Contraseña o usuario incorrectos o espere que se le sea delegado un roll"
-
-# Ruta de usuario
-@app.route('/usuario')
-def usuario():
-    # Equipo correspondiente a user_Usuario
         equipo_usuario = user_Usuario.get("departamento", "")
 
         if equipo_usuario:
@@ -88,8 +73,34 @@ def usuario():
             AcividadesRegistradas = actividades.find({"equipo": equipo_usuario})
             return render_template('usuario.html', actividades=AcividadesRegistradas)
         else:
-            return "Error de ingreso"
+            return "Error"
+        
+        
+    else:
+        # Autenticación fallida, mostrar un mensaje de error
+        return "Error de autenticación, Contraseña o usuario incorrectos o espere que se le sea delegado un roll"
+    
 
+#Actualizar comentario de la actividad
+@app.route('/Añadir_Comentario/<string:actividad_buscada>', methods = ['POST'])
+def Añadir_Comentario(actividad_buscada):
+    acividades = con_bd['Actividades']
+    comentarios=request.form['comentarios']
+    # Utilizaremos la función update_one()
+    if comentarios:
+        acividades.update_one({'actividad': actividad_buscada}, 
+                            {'$set': {'comentarios': comentarios}}) # update_one() necesita de al menos dos parametros para funcionar
+                            
+        previous_url = request.form['previous_url']
+        
+        return f"""
+        <script>
+            alert('Comentario actualizado exitosamente');
+            window.location.href = '{previous_url}';  // Redirige a la URL anterior almacenada en el campo oculto
+        </script>
+        """
+    else:
+        return "Error de actualización"
 
 # Ruta de editar aacividad
 @app.route('/usuarioBusqueda/<string:actividad_buscada>', methods = ['POST'])
@@ -112,7 +123,7 @@ def usuarioBusqueda(actividad_buscada):
         return redirect(url_for('usuario'))
     else:
         return "Error"
-    
+
 # Ruta de error 404
 def error_404(error):
     return render_template('error_404.html'), 404
