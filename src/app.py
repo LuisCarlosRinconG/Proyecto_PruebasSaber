@@ -61,21 +61,58 @@ def validar():
     user_Admin = usuarios.find_one({"email": email,"password": password,"roll":roll})
     user_Usuario = usuarios.find_one({"email": email,"password": password,"roll":roll2})
     
+    
     if user_Admin:
 
         return render_template('admin.html', email=email)
     elif user_Usuario:
+            equipo_usuario = user_Usuario.get("departamento", "")
 
-        return render_template('usuario.html', email=email)
+            if equipo_usuario:
+                actividades = con_bd['Actividades']
+                AcividadesRegistradas = actividades.find({"equipo": equipo_usuario})
+            return render_template('usuario.html', actividades=AcividadesRegistradas)
+        
     else:
         # Autenticación fallida, mostrar un mensaje de error
-        return "Error de autenticación, Contraseña incorrecta"
+        return "Error de autenticación, Contraseña o usuario incorrectos o espere que se le sea delegado un roll"
 
 # Ruta de usuario
 @app.route('/usuario')
 def usuario():
-    return render_template('usuario.html')
+    # Equipo correspondiente a user_Usuario
+        equipo_usuario = user_Usuario.get("departamento", "")
 
+        if equipo_usuario:
+            actividades = con_bd['Actividades']
+            AcividadesRegistradas = actividades.find({"equipo": equipo_usuario})
+            return render_template('usuario.html', actividades=AcividadesRegistradas)
+        else:
+            return "Error de ingreso"
+
+
+# Ruta de editar aacividad
+@app.route('/usuarioBusqueda/<string:actividad_buscada>', methods = ['POST'])
+def usuarioBusqueda(actividad_buscada):
+
+    acividades = con_bd['Actividades']
+    actividad= request.form['actividad']
+    descripcion = request.form['descripcion']
+    equipo = request.form['equipo']
+    fechaI = request.form['fechaI']
+    fechaF = request.form['fechaF']
+    estado = request.form['estado']
+    comentarios=request.form['comentarios']
+
+    if actividad and descripcion and equipo and fechaI and fechaF and estado and comentarios:
+        admin = Admin(actividad, descripcion, equipo, fechaI, fechaF, estado, comentarios)
+        #insert_one para crear un documento en Mongo
+        acividades.update_one({'actividad': actividad_buscada}, 
+                            {'$set': {'actividad' : actividad, 'descripcion': descripcion, 'equipo': equipo,'fechaI' : fechaI, 'fechaF': fechaF, 'estado': estado, 'comentarios': comentarios}}) # update_one() necesita de al menos dos parametros para funcionar
+        return redirect(url_for('usuario'))
+    else:
+        return "Error"
+    
 # Ruta de error 404
 def error_404(error):
     return render_template('error_404.html'), 404

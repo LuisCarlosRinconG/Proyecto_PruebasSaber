@@ -67,8 +67,8 @@
                         </thead>
                         <tbody class="cuerpo">
                             <tr>
-                                <td><input class="input-field form-control" type="text" name="actividad"></td>
-                                <td><input class="input-field form-control" type="text" name="descripcion"></td>
+                                <td><input class="input-field form-control" type="text" name="actividad" required></td>
+                                <td><input class="input-field form-control" type="text" name="descripcion" required></td>
                                 <td>
                                     <select class="input-field form-control" name="equipo">
                                       <option value="desarrolladores">desarrolladores</option>
@@ -78,8 +78,8 @@
                                       <option value="Seguridad">Seguridad</option>
                                     </select>
                                 </td>
-                                <td><input class="input-field form-control" type="text" name="fechaI"></td>
-                                <td><input class="input-field form-control" type="text" name="fechaF"></td>
+                                <td><input class="input-field form-control" type="text" name="fechaI" required></td>
+                                <td><input class="input-field form-control" type="text" name="fechaF" required></td>
                                 <td>
                                     <select class="input-field form-control" name="estado">
                                         <option value="activo">activo</option>
@@ -87,7 +87,7 @@
                                         <option value="cancelado">cancelado</option>
                                     </select>
                                 </td>
-                                <td><input class="input-field form-control" type="text" name="comentarios"></td>
+                                <td><input class="input-field form-control" type="text" name="comentarios" required></td>
                                 <td>
                                     <button type="submit" class="btn btn-secondary btn-sm">Enviar</button>
                                 </td>

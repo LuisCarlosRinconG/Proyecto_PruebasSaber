@@ -29,10 +29,10 @@
                             <h1 class="h3 mb-1" style="color: black;">Registro EaseDevUp</h1>
                             <form action = "/guardar_usuarios" method = "post">
                                 <label for="exampleFormControlInput1" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre de usuario" name = "nombre">
+                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre de usuario" name = "nombre" required>
                             
                                 <label for="exampleFormControlInput1" class="form-label">Correo</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="nombre@ejemplo.com" name = "email">
+                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="nombre@ejemplo.com" name = "email" required>
                                     
                                 <label for="exampleFormControlInput1" class="form-label">Departamento</label>
                                 <select class="form-control" id="exampleFormControlInput1" name="departamento">
@@ -44,10 +44,10 @@
                                 </select>
                                     
                                 <label for="exampleFormControlInput1" class="form-label">Fecha de Nacimiento</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Fecha" name = "cumple">
+                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Fecha" name = "cumple" required>
                                     
                                 <label for="inputPassword5" class="form-label">Contraseña</label>
-                                <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" name = "password">
+                                <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" name = "password" required>
                                 
                                 <div id="passwordHelpBlock" class="form-text">
                                     Asegurate de digitar una contraseña que recuerdes luego.

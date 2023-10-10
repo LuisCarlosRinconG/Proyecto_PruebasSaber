@@ -83,8 +83,8 @@
                                 <tbody>
                                     
                                     <tr>
-                                    <td><input class="input-field form-control" type="text" name="actividad" value="{{admin.actividad}}"></td>
-                                    <td><input class="input-field form-control" type="text" name="descripcion" value="{{admin.descripcion}}"></td>
+                                    <td><input class="input-field form-control" type="text" name="actividad" value="{{admin.actividad}}" required></td>
+                                    <td><input class="input-field form-control" type="text" name="descripcion" value="{{admin.descripcion}}" required></td>
                                     <td>
                                         <select class="input-field form-control" name="equipo">
                                             <option value="desarrolladores" {% if admin.equipo == 'desarrolladores' %}selected{% endif %}>desarrolladores</option>
@@ -94,8 +94,8 @@
                                             <option value="Seguridad" {% if admin.equipo == 'Seguridad' %}selected{% endif %}>Seguridad</option>
                                         </select>
                                     </td>
-                                    <td><input class="input-field form-control" type="text" name="fechaI" value="{{admin.fechaI}}"></td>
-                                    <td><input class="input-field form-control" type="text" name="fechaF" value="{{admin.fechaF}}"></td>
+                                    <td><input class="input-field form-control" type="text" name="fechaI" value="{{admin.fechaI}}" required></td>
+                                    <td><input class="input-field form-control" type="text" name="fechaF" value="{{admin.fechaF}}" required></td>
                                     <td>
                                         <select class="input-field form-control" name="estado">
                                             <option value="activo" {% if admin.estado == 'activo' %}selected{% endif %}>activo</option>
@@ -103,7 +103,7 @@
                                             <option value="cancelado" {% if admin.estado == 'cancelado' %}selected{% endif %}>cancelado</option>
                                         </select>
                                     </td>
-                                    <td><input class="input-field form-control" type="text" name="comentarios" value="{{admin.comentarios}}"></td>
+                                    <td><input class="input-field form-control" type="text" name="comentarios" value="{{admin.comentarios}}" required></td>
                                     <td>
                                         <button type="submit" class="btn btn-secondary btn-sm">Actualizar</button>
                                     </td>
