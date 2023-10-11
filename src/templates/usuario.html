@@ -53,48 +53,43 @@
             </div>
         </header>
     </div>
-    
     <div class="datos">
         <div class="container">
             <h2>Actividades</h2>
-
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th data-th="Actividad">Actividad</th>
-                            <th data-th="Descripción">Descripción</th>
-                            <th data-th="Equipo">Equipo</th>
-                            <th data-th="Fecha Inicio">Fecha Inicio</th>
-                            <th data-th="Fecha Final">Fecha Final</th>
-                            <th data-th="Estado">Estado</th>
-                            <th data-th="Comentarios">Comentarios</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for actividad in actividades %}
-                        <form class="registros" action="/Añadir_Comentario/{{actividad.actividad}}" method="post">
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead class="cabecera">
-                        <tr>
-                            <td>{{ actividad.actividad }}</td>
-                            <td>{{ actividad.descripcion }}</td>
-                            <td>{{ actividad.equipo }}</td>
-                            <td>{{ actividad.fechaI }}</td>
-                            <td>{{ actividad.fechaF }}</td>
-                            <td>{{ actividad.estado }}</td>
-                            <td><input class="input-field form-control" type="text" name="comentarios" required></td>
-                            <input type="hidden" name="previous_url" value="{{ request.url }}">
-                            <td>
-                                <button type="submit" class="btn btn-secondary btn-sm">Enviar</button>
-                            </td>
-                        </tr>
-        </form>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+            {% for actividad in actividades %}
+            <form class="registros" action="/editar_Comentario/{{ actividad.actividad }}" method="post">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th data-th="Actividad">Actividad</th>
+                                <th data-th="Descripción">Descripción</th>
+                                <th data-th="Equipo">Equipo</th>
+                                <th data-th="Fecha Inicio">Fecha Inicio</th>
+                                <th data-th="Fecha Final">Fecha Final</th>
+                                <th data-th="Estado">Estado</th>
+                                <th data-th="Comentarios">Comentarios</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ actividad.actividad }}</td>
+                                <td>{{ actividad.descripcion }}</td>
+                                <td>{{ actividad.equipo }}</td>
+                                <td>{{ actividad.fechaI }}</td>
+                                <td>{{ actividad.fechaF }}</td>
+                                <td>{{ actividad.estado }}</td>
+                                <td><input class="input-field form-control" type="text" name="comentarios" required></td>
+                                <td>
+                                    <button type="submit" class="btn btn-info btn-sm">Enviar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+            {% endfor %}
         </div>
     </div>
 
