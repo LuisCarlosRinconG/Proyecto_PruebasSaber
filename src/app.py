@@ -47,6 +47,7 @@ def login():
     # Lógica para mostrar la página de inicio de sesión
     return render_template('login.html')
 
+
 #Validación de usuario
 @app.route('/validar', methods = ['POST'])
 def validar():
@@ -61,17 +62,15 @@ def validar():
     user_Admin = usuarios.find_one({"email": email,"password": password,"roll":roll})
     user_Usuario = usuarios.find_one({"email": email,"password": password,"roll":roll2})
     
-    
     if user_Admin:
         actividades= con_bd['Actividades']
         ActividadesRegistradas=actividades.find()
         return render_template('admin.html', actividades = ActividadesRegistradas)
     elif user_Usuario:
-            equipo_usuario = user_Usuario.get("departamento", "")
-
-            if equipo_usuario:
-                actividades = con_bd['Actividades']
-                AcividadesRegistradas = actividades.find({"equipo": equipo_usuario})
+        equipo_usuario = user_Usuario.get("departamento", "")
+        if equipo_usuario:
+            actividades = con_bd['Actividades']
+            AcividadesRegistradas = actividades.find({"equipo": equipo_usuario, "estado": "activo"})
             return render_template('usuario.html', actividades=AcividadesRegistradas)
         
     else:
@@ -83,7 +82,7 @@ def validar():
 def usuario():
     # Equipo correspondiente a user_Usuario
     usuarios = con_bd['Usuarios']
-    user_Usuario = usuarios.find_one()  # Utiliza find_one para obtener un único usuario
+    user_Usuario = usuarios.find_one({"email": email, "password": password, "roll": roll2})
     if user_Usuario:
         equipo_usuario = user_Usuario.get("departamento", "")
         if equipo_usuario:
@@ -101,9 +100,10 @@ def editar_Comentario(actividad_buscada):
     if comentarios:
         acividades.update_one({'actividad': actividad_buscada}, 
                             {'$set': {'comentarios': comentarios}}) # update_one() necesita de al menos dos parametros para funcionar
-        return redirect(url_for('usuario'))
+        return redirect(url_for('index'))
     else:
         return "Error de actualización"
+
 # Ruta de editar aacividad
 @app.route('/usuarioBusqueda/<string:actividad_buscada>', methods = ['POST'])
 def usuarioBusqueda(actividad_buscada):
@@ -166,6 +166,12 @@ def Read():
     query={"fechaI":fechabuscada}
     AcividadesRegistradas=actividades.find(query)
     return render_template('datos.html', actividades = AcividadesRegistradas)
+
+@app.route('/eliminar_Actividad/<string:ActividadElimin>')
+def eliminar_Actividad(ActividadElimin):
+    acividades = con_bd['Actividades']
+    acividades.delete_one({ 'actividad': ActividadElimin})
+    return redirect(url_for('admin'))
 
 #Editar o actualizar el contenido de la actividad
 @app.route('/editar_actividad/<string:actividad_buscada>', methods = ['POST'])
