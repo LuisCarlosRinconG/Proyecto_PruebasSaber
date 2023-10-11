@@ -47,39 +47,40 @@ def login():
     # Lógica para mostrar la página de inicio de sesión
     return render_template('login.html')
 
-
-#Validación de usuario
-@app.route('/validar', methods = ['POST'])
+# Validación de usuario
+@app.route('/validar', methods=['POST'])
 def validar():
     # Obtener datos del formulario
     email = request.form['email']
     password = request.form['password']
-    roll='admin'
-    roll2='usuario'
-    
+    roll = 'admin'
+    roll2 = 'usuario'
+
     # Realizar la búsqueda en la base de datos para verificar la autenticación
     usuarios = con_bd['Usuarios']
-    user_Admin = usuarios.find_one({"email": email,"password": password,"roll":roll})
-    user_Usuario = usuarios.find_one({"email": email,"password": password,"roll":roll2})
-    
+    user_Admin = usuarios.find_one({"email": email, "password": password, "roll": roll})
+    user_Usuario = usuarios.find_one({"email": email, "password": password, "roll": roll2})
+
     if user_Admin:
-        actividades= con_bd['Actividades']
-        ActividadesRegistradas=actividades.find()
-        return render_template('admin.html', actividades = ActividadesRegistradas)
+        actividades = con_bd['Actividades']
+        ActividadesRegistradas = actividades.find()
+        return render_template('admin.html', actividades=ActividadesRegistradas)
     elif user_Usuario:
-        equipo_usuario = user_Usuario.get("departamento", "")
-        if equipo_usuario:
-            actividades = con_bd['Actividades']
-            AcividadesRegistradas = actividades.find({"equipo": equipo_usuario, "estado": "activo"})
-            return render_template('usuario.html', actividades=AcividadesRegistradas)
-        
+        return redirect(url_for('usuario', email=email, password=password))
+
     else:
         # Autenticación fallida, mostrar un mensaje de error
-        return "Error de autenticación, Contraseña o usuario incorrectos o espere que se le sea delegado un roll"
+        return "Error de autenticación, Contraseña o usuario incorrectos o espere que se le sea delegado un rol"
 
 # Ruta de usuario
 @app.route('/usuario')
 def usuario():
+    # Obtener los parámetros de la URL usando request.args
+    email = request.args.get('email')
+    password = request.args.get('password')
+
+    roll = 'admin'
+    roll2 = 'usuario'
     # Equipo correspondiente a user_Usuario
     usuarios = con_bd['Usuarios']
     user_Usuario = usuarios.find_one({"email": email, "password": password, "roll": roll2})
@@ -87,9 +88,18 @@ def usuario():
         equipo_usuario = user_Usuario.get("departamento", "")
         if equipo_usuario:
             actividades = con_bd['Actividades']
-            AcividadesRegistradas = actividades.find({"equipo": equipo_usuario})
+            AcividadesRegistradas = actividades.find({"equipo": equipo_usuario, "estado": "activo"})
+            url_for('historial', email=email, password=password)
             return render_template('usuario.html', actividades=AcividadesRegistradas)
     return "Error de ingreso"
+
+# Ruta de Historail
+@app.route('/historial')
+def historial():
+    actividades = con_bd['Actividades']
+    ActividadesRegistradas=actividades.find({"estado": {"$in": ["finalizado", "cancelado"]}
+            })
+    return render_template('historial.html', actividades = ActividadesRegistradas)
 
 #Actualizar el comentario de usuario
 @app.route('/editar_Comentario/<string:actividad_buscada>', methods = ['POST'])
@@ -100,7 +110,7 @@ def editar_Comentario(actividad_buscada):
     if comentarios:
         acividades.update_one({'actividad': actividad_buscada}, 
                             {'$set': {'comentarios': comentarios}}) # update_one() necesita de al menos dos parametros para funcionar
-        return redirect(url_for('index'))
+        return redirect(url_for('historial'))
     else:
         return "Error de actualización"
 
