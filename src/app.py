@@ -19,28 +19,58 @@ def index():
 def nosotros():
     return render_template('nosotros.html')
 
-
 @app.route('/perfil')
 def CrearPerfil():
-    perfiles= con_bd['Perfiles']
-    PerfilesRegistradas=perfiles.find()
-    return render_template('Perfil.html', perfiles= PerfilesRegistradas)
+    perfiles = con_bd['Perfiles']
+    PerfilesRegistradas = perfiles.find()
+    return render_template('Perfil.html', perfiles=PerfilesRegistradas)
 
-#Ruta para guardar nuevos perfiles de usuario
-@app.route('/guardar_perfiles', methods = ['POST'])
+# Ruta para guardar nuevos perfiles de usuario
+@app.route('/guardar_perfiles', methods=['POST'])
 def Crearperfiles():
-    perfiles= con_bd['Perfiles']
+    perfiles = con_bd['Perfiles']
     cc = request.form['cc']
     nombre = request.form['nombre']
     apellido = request.form['apellido']
     telefono = request.form['telefono']
-    cargo= request.form['cargo']
-    sexo= request.form['sexo']
-
+    cargo = request.form['cargo']
+    sexo = request.form['sexo']
 
     if cc and nombre and apellido and telefono and cargo and sexo:
         user = Perfil(cc, nombre, apellido, telefono, cargo, sexo)
         perfiles.insert_one(user.formato_doc())
+        return redirect(url_for('CrearPerfil'))
+    else:
+        return "Error"
+
+@app.route('/eliminar_perfil/<string:cc>')
+def eliminar_perfil(cc):
+    perfiles = con_bd['Perfiles']
+    perfiles.delete_one({'cc': cc})
+    return redirect(url_for('CrearPerfil'))
+
+@app.route('/editar_perfil/<string:cc>', methods=['POST'])
+def editar_perfil(cc):
+    perfiles = con_bd['Perfiles']
+    # Se obtienen los datos del formulario de edición
+    id = request.form['id']
+    nombre = request.form['nombre']
+    apellido = request.form['apellido']
+    telefono = request.form['telefono']
+    cargo = request.form['cargo']
+    sexo = request.form['sexo']
+    # Utilizamos la función update_one para actualizar los datos en MongoDB
+    if id and nombre and apellido and telefono and cargo and sexo:
+        perfiles.update_one({'cc': cc}, {
+            '$set': {
+                'cc': id,
+                'nombre': nombre,
+                'apellido': apellido,
+                'telefono': telefono,
+                'cargo': cargo,
+                'sexo': sexo
+            }
+        })
         return redirect(url_for('CrearPerfil'))
     else:
         return "Error"
