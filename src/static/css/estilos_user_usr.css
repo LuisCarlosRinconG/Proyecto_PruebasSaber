@@ -1,19 +1,47 @@
-header {
+/**Estilos generales**/
+body{
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+
+/**Barra de navegación**/
+header{
     background-color: #f0f0f0;
     border-radius: 10px; 
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+/**contenedor del contenido principal**/
+.datos{
+    padding: 25px;
+}
+
+h2{
+    font-size: 24px;
+    text-align: center;
+}
+
+.table{
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+}
+
+.registros{
+    border-radius: 10px;
 }
 
 
-footer {
+/**Barra inferior**/
+footer{
     background: #414141;
     padding: 60px 0 30px 0;
-    color: #fff;
-    text-align: center;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+    margin: auto;
+    overflow: hidden;
 }
 
 .contenedor-footer{
@@ -21,12 +49,13 @@ footer {
     width: 90%;
     justify-content: space-evenly;
     margin: auto;
-    padding-bottom: 50px;
+    padding-bottom: 20px;
     border-bottom: 1px solid #ccc;
 }
 
 .content-foo{
     text-align: center;
+    color: white;
 }
 
 .content-foo h4{
@@ -40,9 +69,19 @@ footer {
     color: #ccc;
 }
 
+.content-foo a {
+    color: white;          
+    text-decoration: none; 
+    transition: color 0.2s; 
+}
+
+.content-foo a:hover {
+    color: #888;           
+}
+
 .titulo-final{
     text-align: center;
     font-size: 24px;
     margin: 20px 0 0 0;
-    color: #9e9797;
+    color: #ffffff;
 }

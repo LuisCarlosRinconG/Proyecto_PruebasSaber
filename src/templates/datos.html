@@ -11,56 +11,41 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container-fluid">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-            <div class="col-md-3 mb-2 mb-md-0 text-center text-md-start">
-                <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <img src="{{ url_for('static', filename='img/Logo.png') }}" alt="Logo" width="50%" height="auto" aria-label="Logo">
-                </a>
-            </div>
-            </div>
+    <!-- Navbar -->
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <img class="fs-4" src="{{ url_for('static', filename='img/Logo.png') }}" alt="Logo" width="50%" height="auto" aria-label="Logo">
+        </a>
     
-            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="/" class="nav-link px-2">Inicio</a></li>
-                <li><a href="#" class="nav-link px-2">Sobre Nosotros</a></li>
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link px-2 dropdown-toggle" id="contactanosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Contactanos
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="contactanosDropdown">
-                        <li><a class="dropdown-item" href="https://linktr.ee/LuisCarlosRinconGordo" target="_blank">Luis Rincón</a></li>
-                        <li><a class="dropdown-item" href="https://github.com/cristian34823" target="_blank">Cristian Chiguasuque</a></li>
-                        <li><a class="dropdown-item" href="https://linktr.ee/ThePolanco" target="_blank">Jeison Polanco</a></li>
-                    </ul>
-                </li>
-            </ul>
-    
-            <div class="col-md-3 text-end">
-                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Inicio</a></li>
+            <li class="nav-item"><a href="/nosotros" class="nav-link">Sobre Nosotros</a></li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link" id="contactanosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Contactanos
                 </a>
-                <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="#">Perfil</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="/">Salir</a></li>
+                <ul class="dropdown-menu" aria-labelledby="contactanosDropdown">
+                    <li><a class="dropdown-item" href="https://linktr.ee/LuisCarlosRinconGordo" target="_blank">Luis Rincón</a></li>
+                    <li><a class="dropdown-item" href="https://github.com/cristian34823" target="_blank">Cristian Chiguasuque</a></li>
+                    <li><a class="dropdown-item" href="https://linktr.ee/ThePolanco" target="_blank">Jeison Polanco</a></li>
                 </ul>
-            </div>
-        </header>
-    </div>
-    
-        <div class="contenedor_datos">
-            <div class="area_historico">
-                <div class="card text-bg-light">
-                    <article class="zona_graficos">   
-                        <h3 class="titulo">Filtro de Actividades por fecha de inicio</h3>
-                        <p>Ingresa la fecha con formato "AAAA-MM-DD"</p>
-                        <form action = "/fechaBuscada" method = "post">
-                            <input type="text" name="fechaI" placeholder="DD-MM-AAAA">
-                            <button type = "submit">Buscar</button>
-                        </form>
-                    </article>
+            </li>
+            <li class="nav-item"><a href="/perfil" class="nav-link">Perfil</a></li>
+        </ul>
+    </header>
+    <div class="datos">
+        <div class="container_agregar">
+            <div class="area_filtro">
+                <div class="card text-bg-light">   
+                    <h3 class="titulo">Filtro de Actividades por fecha de inicio</h3>
+                    <p>Ingresa la fecha con formato "AAAA-MM-DD"</p>
+                    <form action = "/fechaBuscada" method = "post">
+                        <input type="text" name="fechaI" placeholder="DD-MM-AAAA">
+                        <button type = "submit">Buscar</button>
+                    </form>
                 </div>
             </div>
+            <hr>
             <div class="area_graficos">
                 <article>
                     <section class="zona_historico">
@@ -70,62 +55,61 @@
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead class="cabecera">
-                                    <tr>
-                                    <th data-th="Actividad">Actividad</th>
-                                    <th data-th="Descripción">Descripción</th>
-                                    <th data-th="Equipo">Equipo</th>
-                                    <th data-th="Fecha Inicio">Fecha Inicio</th>
-                                    <th data-th="Fecha Final">Fecha Final</th>
-                                    <th data-th="Estado">Estado</th>
-                                    <th data-th="Comentarios">Comentarios</th>
-                                    <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    
-                                    <tr>
-                                    <td><input class="input-field form-control" type="text" name="actividad" value="{{admin.actividad}}" required></td>
-                                    <td><input class="input-field form-control" type="text" name="descripcion" value="{{admin.descripcion}}" required></td>
-                                    <td>
-                                        <select class="input-field form-control" name="equipo">
-                                            <option value="desarrolladores" {% if admin.equipo == 'desarrolladores' %}selected{% endif %}>desarrolladores</option>
-                                            <option value="administradores de bases de datos" {% if admin.equipo == 'administradores de bases de datos' %}selected{% endif %}>administradores de bases de datos</option>
-                                            <option value="devops" {% if admin.equipo == 'devops' %}selected{% endif %}>devops</option>
-                                            <option value="analistas" {% if admin.equipo == 'analistas' %}selected{% endif %}>analistas</option>
-                                            <option value="Seguridad" {% if admin.equipo == 'Seguridad' %}selected{% endif %}>Seguridad</option>
-                                        </select>
-                                    </td>
-                                    <td><input class="input-field form-control" type="text" name="fechaI" value="{{admin.fechaI}}" required></td>
-                                    <td><input class="input-field form-control" type="text" name="fechaF" value="{{admin.fechaF}}" required></td>
-                                    <td>
-                                        <select class="input-field form-control" name="estado">
-                                            <option value="activo" {% if admin.estado == 'activo' %}selected{% endif %}>activo</option>
-                                            <option value="finalizado" {% if admin.estado == 'finalizado' %}selected{% endif %}>finalizado</option>
-                                            <option value="cancelado" {% if admin.estado == 'cancelado' %}selected{% endif %}>cancelado</option>
-                                        </select>
-                                    </td>
-                                    <td><input class="input-field form-control" type="text" name="comentarios" value="{{admin.comentarios}}" required></td>
-                                    <td>
-                                        <button type="submit" class="btn btn-secondary btn-sm">Actualizar</button>
-                                        <a href="{{url_for('eliminar_Actividad', ActividadElimin=admin.actividad)}}"onclick="return confirm('¿Esta seguro de eliminar el documento con el nombre {{admin.actividad}}? ')">Eliminar</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </form>
-                                {%endfor%}
-                            </tbody>
-                        </table>
+                                        <tr>
+                                        <th data-th="Actividad">Actividad</th>
+                                        <th data-th="Descripción">Descripción</th>
+                                        <th data-th="Equipo">Equipo</th>
+                                        <th data-th="Fecha Inicio">Fecha Inicio</th>
+                                        <th data-th="Fecha Final">Fecha Final</th>
+                                        <th data-th="Estado">Estado</th>
+                                        <th data-th="Comentarios">Comentarios</th>
+                                        <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                        <td><input class="input-field form-control" type="text" name="actividad" value="{{admin.actividad}}" required></td>
+                                        <td><input class="input-field form-control" type="text" name="descripcion" value="{{admin.descripcion}}" required></td>
+                                        <td>
+                                            <select class="input-field form-control" name="equipo">
+                                                <option value="desarrolladores" {% if admin.equipo == 'desarrolladores' %}selected{% endif %}>Desarrollo</option>
+                                                <option value="administradores de bases de datos" {% if admin.equipo == 'administradores de bases de datos' %}selected{% endif %}>Administrador de bases de datos</option>
+                                                <option value="devops" {% if admin.equipo == 'devops' %}selected{% endif %}>Dev-ops</option>
+                                                <option value="analistas" {% if admin.equipo == 'analistas' %}selected{% endif %}>Analisis</option>
+                                                <option value="Seguridad" {% if admin.equipo == 'Seguridad' %}selected{% endif %}>Seguridad</option>
+                                            </select>
+                                        </td>
+                                        <td><input class="input-field form-control" type="text" name="fechaI" value="{{admin.fechaI}}" required></td>
+                                        <td><input class="input-field form-control" type="text" name="fechaF" value="{{admin.fechaF}}" required></td>
+                                        <td>
+                                            <select class="input-field form-control" name="estado">
+                                                <option value="activo" {% if admin.estado == 'activo' %}selected{% endif %}>Activo</option>
+                                                <option value="finalizado" {% if admin.estado == 'finalizado' %}selected{% endif %}>Finalizado</option>
+                                                <option value="cancelado" {% if admin.estado == 'cancelado' %}selected{% endif %}>Cancelado</option>
+                                            </select>
+                                        </td>
+                                        <td><input class="input-field form-control" type="text" name="comentarios" value="{{admin.comentarios}}" required></td>
+                                        <td>
+                                            <button type="submit" class="btn btn-secondary btn-sm">Actualizar</button>
+                                            <a href="{{url_for('eliminar_Actividad', ActividadElimin=admin.actividad)}}"onclick="return confirm('¿Esta seguro de eliminar el documento con el nombre {{admin.actividad}}? ')">Eliminar</a>
+                                        </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                        {%endfor%}
                     </section>
                 </article>
             </div>
         </div>
+    </div>    
         <footer>
             <div class="contenedor-footer">
                 <div class="content-foo">
-                    <h4>Telefono</h4>
-                    <p>3013707162</p>
+                    <h4>Funciones</h4>
+                    <p><a href="/">Inicio</a></p>
+                    <p><a href="/perfil">Mi Perfil</a></p>
                 </div>
                 <div class="content-foo">
                     <h4>Correo de contacto</h4>
@@ -135,8 +119,14 @@
                     <h4>Ubicación</h4>
                     <p>Villa De San Diego De Ubaté</p>
                 </div>
+                <div class="content-foo">
+                    <h4>Equipo</h4>
+                    <p><a href="https://linktr.ee/LuisCarlosRinconGordo">Luis Carlos Rincón</a></p>
+                    <p><a href="https://github.com/cristian34823">Cristian David Chiguasuque</a></p>
+                    <p><a href="https://linktr.ee/ThePolanco">Jeison Stiven Polanco</a></p>
+                </div>
             </div>
-            <h2 class="titulo-final">&copy; Universidad De Cundinamarca | Facultad De Ingenieria</h2>
+            <h2 class="titulo-final">&copy; Udec-Soft | EaseDevUp</h2>
         </footer>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     </body>

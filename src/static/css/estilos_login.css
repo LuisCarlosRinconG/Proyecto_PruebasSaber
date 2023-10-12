@@ -35,6 +35,7 @@ body {
     text-align: center;
 }
 
+/**Barra inferior**/
 footer{
     background: #414141;
     padding: 60px 0 30px 0;
@@ -47,13 +48,15 @@ footer{
     width: 90%;
     justify-content: space-evenly;
     margin: auto;
-    padding-bottom: 50px;
+    padding-bottom: 20px;
     border-bottom: 1px solid #ccc;
 }
 
 .content-foo{
     text-align: center;
+    color: white;
 }
+
 
 .content-foo h4{
     color: #fff;
@@ -66,9 +69,19 @@ footer{
     color: #ccc;
 }
 
+.content-foo a {
+    color: white;          
+    text-decoration: none; 
+    transition: color 0.2s; 
+}
+
+.content-foo a:hover {
+    color: #888;           
+}
+
 .titulo-final{
     text-align: center;
     font-size: 24px;
     margin: 20px 0 0 0;
-    color: #9e9797;
+    color: #ffffff;
 }

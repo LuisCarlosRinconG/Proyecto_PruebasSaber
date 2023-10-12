@@ -18,46 +18,29 @@
 </head>
 <body>
     <!-- Navbar -->
-    <div class="container-fluid">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-            <div class="col-md-3 mb-2 mb-md-0 text-center text-md-start">
-                <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <img src="{{ url_for('static', filename='img/Logo.png') }}" alt="Logo" width="50%" height="auto" aria-label="Logo">
-                </a>
-            </div>
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <img class="fs-4" src="{{ url_for('static', filename='img/Logo.png') }}" alt="Logo" width="50%" height="auto" aria-label="Logo">
+        </a>
     
-            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="/" class="nav-link px-2">Inicio</a></li>
-                <li><a href="#" class="nav-link px-2">Sobre Nosotros</a></li>
-                <li><a href="/historial" class="nav-link px-2">Historial</a></li>
-                
-
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link px-2 dropdown-toggle" id="contactanosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Contactanos
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="contactanosDropdown">
-                        <li><a class="dropdown-item" href="https://linktr.ee/LuisCarlosRinconGordo" target="_blank">Luis Rincón</a></li>
-                        <li><a class="dropdown-item" href="https://github.com/cristian34823" target="_blank">Cristian Chiguasuque</a></li>
-                        <li><a class="dropdown-item" href="https://linktr.ee/ThePolanco" target="_blank">Jeison Polanco</a></li>
-                    </ul>
-                </li>
-            </ul>
-    
-            <div class="col-md-3 text-end">
-                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Inicio</a></li>
+            <li class="nav-item"><a href="/nosotros" class="nav-link">Sobre Nosotros</a></li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link" id="contactanosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Contactanos
                 </a>
-                <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="#">Perfil</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="/">Salir</a></li>
+                <ul class="dropdown-menu" aria-labelledby="contactanosDropdown">
+                    <li><a class="dropdown-item" href="https://linktr.ee/LuisCarlosRinconGordo" target="_blank">Luis Rincón</a></li>
+                    <li><a class="dropdown-item" href="https://github.com/cristian34823" target="_blank">Cristian Chiguasuque</a></li>
+                    <li><a class="dropdown-item" href="https://linktr.ee/ThePolanco" target="_blank">Jeison Polanco</a></li>
                 </ul>
-            </div>
-        </header>
-    </div>
+            </li>
+            <li class="nav-item"><a href="/perfil" class="nav-link">Perfil</a></li>
+        </ul>
+    </header>
     <div class="datos">
-        <div class="container">
+        <div class="container_datos">
             <h2>Actividades</h2>
             {% for actividad in actividades %}
             <form class="registros" action="/editar_Comentario/{{ actividad.actividad }}" method="post">
@@ -85,7 +68,7 @@
                                 <td>{{ actividad.estado }}</td>
                                 <td><input class="input-field form-control" type="text" name="comentarios" required placeholder="{{ actividad.comentarios}}"></td>
                                 <td>
-                                    <button type="submit" class="btn btn-info btn-sm">Enviar</button>
+                                    <button type="submit" class="btn btn-success btn-sm">Enviar</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -99,8 +82,9 @@
     <footer>
         <div class="contenedor-footer">
             <div class="content-foo">
-                <h4>Telefono</h4>
-                <p>3013707162</p>
+                <h4>Funciones</h4>
+                <p><a href="/">Inicio</a></p>
+                <p><a href="/perfil">Mi Perfil</a></p>
             </div>
             <div class="content-foo">
                 <h4>Correo de contacto</h4>
@@ -110,8 +94,14 @@
                 <h4>Ubicación</h4>
                 <p>Villa De San Diego De Ubaté</p>
             </div>
+            <div class="content-foo">
+                <h4>Equipo</h4>
+                <p><a href="https://linktr.ee/LuisCarlosRinconGordo">Luis Carlos Rincón</a></p>
+                <p><a href="https://github.com/cristian34823">Cristian David Chiguasuque</a></p>
+                <p><a href="https://linktr.ee/ThePolanco">Jeison Stiven Polanco</a></p>
+            </div>
         </div>
-        <h2 class="titulo-final">&copy; Universidad De Cundinamarca | Facultad De Ingenieria</h2>
+        <h2 class="titulo-final">&copy; Udec-Soft | EaseDevUp</h2>
     </footer>
 </body>
 </html>

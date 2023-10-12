@@ -13,6 +13,10 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+#Ruta sobre nosotros
+@app.route('/nosotros')
+def nosotros():
+    return render_template('nosotros.html')
 
 # Crear usuario
 @app.route('/registro')
