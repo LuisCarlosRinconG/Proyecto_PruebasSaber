@@ -14,11 +14,12 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-#Ruta sobre nosotros
+# Ruta sobre nosotros
 @app.route('/nosotros')
 def nosotros():
     return render_template('nosotros.html')
 
+# Ruta perfil de usuario
 @app.route('/perfil')
 def CrearPerfil():
     perfiles = con_bd['Perfiles']
@@ -43,12 +44,14 @@ def Crearperfiles():
     else:
         return "Error"
 
+# Función para eliminar perfiles a traves del dato cc
 @app.route('/eliminar_perfil/<string:cc>')
 def eliminar_perfil(cc):
     perfiles = con_bd['Perfiles']
     perfiles.delete_one({'cc': cc})
     return redirect(url_for('CrearPerfil'))
 
+# Editar perfil
 @app.route('/editar_perfil/<string:cc>', methods=['POST'])
 def editar_perfil(cc):
     perfiles = con_bd['Perfiles']
@@ -102,6 +105,7 @@ def agregarUser():
     else:
         return "Error"
 
+# Ruta para el login
 @app.route('/login')
 def login():
     # Lógica para mostrar la página de inicio de sesión
@@ -153,7 +157,7 @@ def usuario():
             return render_template('usuario.html', actividades=AcividadesRegistradas)
     return "Error de ingreso"
 
-# Ruta de Historail
+# Ruta de Historial
 @app.route('/historial')
 def historial():
     actividades = con_bd['Actividades']
@@ -174,7 +178,7 @@ def editar_Comentario(actividad_buscada):
     else:
         return "Error de actualización"
 
-# Ruta de editar aacividad
+# Ruta de editar actividad
 @app.route('/usuarioBusqueda/<string:actividad_buscada>', methods = ['POST'])
 def usuarioBusqueda(actividad_buscada):
 
@@ -195,11 +199,11 @@ def usuarioBusqueda(actividad_buscada):
         return redirect(url_for('usuario'))
     else:
         return "Error"
+ 
     
 # Ruta de error 404
 def error_404(error):
     return render_template('error_404.html'), 404
-
 
 # Ruta de administrador
 @app.route('/admin')
@@ -228,7 +232,7 @@ def agregarActividad():
     else:
         return "Error"
 
-#Ruta para la pantalla de datos donde se muestra la data consultada
+# Ruta para la pantalla de datos donde se muestra la data consultada
 @app.route('/fechaBuscada',methods = ['POST'])
 def Read():
     actividades = con_bd['Actividades']
@@ -237,13 +241,14 @@ def Read():
     AcividadesRegistradas=actividades.find(query)
     return render_template('datos.html', actividades = AcividadesRegistradas)
 
+# Ruta para eliminar actividades
 @app.route('/eliminar_Actividad/<string:ActividadElimin>')
 def eliminar_Actividad(ActividadElimin):
     acividades = con_bd['Actividades']
     acividades.delete_one({ 'actividad': ActividadElimin})
     return redirect(url_for('admin'))
 
-#Editar o actualizar el contenido de la actividad
+# Editar o actualizar el contenido de la actividad
 @app.route('/editar_actividad/<string:actividad_buscada>', methods = ['POST'])
 def editar(actividad_buscada):
     acividades = con_bd['Actividades']

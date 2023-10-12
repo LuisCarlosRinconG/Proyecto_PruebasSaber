@@ -33,6 +33,14 @@ header{
     padding: 10px;
 }
 
+.container_titulo{
+    color: white;
+}
+
+.container_perfil{
+    padding: 25px;
+}
+
 /**Barra inferior**/
 footer{
     background: #414141;
