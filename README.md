@@ -9,7 +9,7 @@ Intrucciones:
 3. Si el usuario no tiene cuenta debera ingresar al modulo de "Registro", donde debera digitar sus datos correspondientes y quedara en lista de espera para un administrador gestinone su rol dentro de la empresa, de esta manera luego de ser establecido su correspondiente rol podra ingresar a su pantalla para realizar sus actividades.
 4. Si el usuario se dirige al apartado "Sobre Nosotros" podra visualizar una descripcion de EaseDevUp, su objetivo y los desarrolladores del aplicativo.
 5. Dentro del boton contactanos podra dirigirse a los perfiles personales de cada uno de los desarrolladores.
-6. Si el usuario se dirige al modulo de perfil podra ...
+6. Si el usuario se dirige al modulo de perfil podra editar los datos que considere necesarios en su perfil.
 
 Desarrollada por:
 - Luis Carlos Rincón Gordo
