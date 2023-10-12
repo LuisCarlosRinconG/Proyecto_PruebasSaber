@@ -26,16 +26,6 @@
         <ul class="nav nav-pills">
             <li class="nav-item"><a href="/historial" class="nav-link active" aria-current="page">Historial</a></li>
             <li class="nav-item"><a href="/nosotros" class="nav-link">Sobre Nosotros</a></li>
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link" id="contactanosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Contactanos
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="contactanosDropdown">
-                    <li><a class="dropdown-item" href="https://linktr.ee/LuisCarlosRinconGordo" target="_blank">Luis Rincón</a></li>
-                    <li><a class="dropdown-item" href="https://github.com/cristian34823" target="_blank">Cristian Chiguasuque</a></li>
-                    <li><a class="dropdown-item" href="https://linktr.ee/ThePolanco" target="_blank">Jeison Polanco</a></li>
-                </ul>
-            </li>
             <li class="nav-item"><a href="/perfil" class="nav-link">Perfil</a></li>
             <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Salir</a></li>
         </ul>
@@ -43,6 +33,7 @@
     <div class="datos">
         <div class="container_datos">
             <h2>Actividades</h2>
+            <br>
             {% for actividad in actividades %}
             <form class="registros" action="/editar_Comentario/{{ actividad.actividad }}" method="post">
                 <div class="table-responsive">
@@ -67,7 +58,7 @@
                                 <td>{{ actividad.fechaI }}</td>
                                 <td>{{ actividad.fechaF }}</td>
                                 <td>{{ actividad.estado }}</td>
-                                <td><input class="input-field form-control" type="text" name="comentarios" required placeholder="{{ actividad.comentarios}}"></td>
+                                <td><input class="input-field form-control" type="text" name="comentarios" required placeholder="{{ actividad.comentarios }}"></td>
                                 <td>
                                     <button type="submit" class="btn btn-success btn-sm">Enviar</button>
                                 </td>

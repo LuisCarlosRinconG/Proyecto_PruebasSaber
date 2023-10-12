@@ -9,9 +9,9 @@ body{
     font-family: 'open sans';
 }
 .contenedor{
-    padding: 60PX 0;
+    padding: 30px 0;
     width: 90%;
-    max-width: 1000PX;
+    max-width: 1000px;
     margin: auto;
     overflow: hidden;
 }
@@ -20,7 +20,7 @@ body{
     color: #642a73;
     font-size: 30px;
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
 }
 
 header{
@@ -29,7 +29,6 @@ header{
     background: #5f2c82;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, hsla(178, 37%, 46%, 0.452), hsla(276, 49%, 34%, 0.461)), url(../img/Ima3.png);  
     background: linear-gradient(to right, hsla(178, 37%, 46%, 0.452), hsla(276, 49%, 34%, 0.461)), url(../img/Ima3.png); 
-
     background-size: cover;
     background-attachment: fixed;
     position: relative;
@@ -59,6 +58,7 @@ header .textos-header{
     justify-content: center;
     flex-direction: column;
     text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .textos-header h1{
@@ -153,6 +153,10 @@ header .textos-header{
     justify-content: space-evenly;
     border-radius: 5px;
     box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.6);
+}
+
+.card{
+    margin: 5px;
 }
 
 .cards .card img{

@@ -14,31 +14,30 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>   
 </head>
 <body>
-    <div class="container-fluid">
-        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                <img class="fs-4" src="{{ url_for('static', filename='img/Logo.png') }}" alt="Logo" width="50%" height="auto" aria-label="Logo">
-            </a>
-        
-            <ul class="nav nav-pills">
-                <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Inicio</a></li>
-                <li class="nav-item"><a href="/nosotros" class="nav-link">Sobre Nosotros</a></li>
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link" id="contactanosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Contactanos
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="contactanosDropdown">
-                        <li><a class="dropdown-item" href="https://linktr.ee/LuisCarlosRinconGordo" target="_blank">Luis Rincón</a></li>
-                        <li><a class="dropdown-item" href="https://github.com/cristian34823" target="_blank">Cristian Chiguasuque</a></li>
-                        <li><a class="dropdown-item" href="https://linktr.ee/ThePolanco" target="_blank">Jeison Polanco</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item"><a href="/perfil" class="nav-link">Perfil</a></li>
-            </ul>
-        </header>
-    </div>
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <img class="fs-4" src="{{ url_for('static', filename='img/Logo.png') }}" alt="Logo" width="50%" height="auto" aria-label="Logo">
+        </a>
+    
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Inicio</a></li>
+            <li class="nav-item"><a href="/nosotros" class="nav-link">Sobre Nosotros</a></li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link" id="contactanosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Contactanos
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="contactanosDropdown">
+                    <li><a class="dropdown-item" href="https://linktr.ee/LuisCarlosRinconGordo" target="_blank">Luis Rincón</a></li>
+                    <li><a class="dropdown-item" href="https://github.com/cristian34823" target="_blank">Cristian Chiguasuque</a></li>
+                    <li><a class="dropdown-item" href="https://linktr.ee/ThePolanco" target="_blank">Jeison Polanco</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a href="/perfil" class="nav-link">Perfil</a></li>
+            <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Salir</a></li>
+        </ul>
+    </header>
         <!--Mostrar datos registrados en una tabla con paginación gracias a JavaScript-->
-        <div class="contenedor_datos">
+        <div class="datos">
             <div class="area_graficos">
                 <article>
                     <section class="zona_historico">
