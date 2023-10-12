@@ -16,7 +16,6 @@
         </a>
     
         <ul class="nav nav-pills">
-            <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Inicio</a></li>
             <li class="nav-item"><a href="/nosotros" class="nav-link">Sobre Nosotros</a></li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link" id="contactanosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -29,6 +28,7 @@
                 </ul>
             </li>
             <li class="nav-item"><a href="/perfil" class="nav-link">Perfil</a></li>
+            <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Salir</a></li>
         </ul>
     </header>
     <div class="container">
@@ -42,60 +42,40 @@
                         <h5 class="text-center">Datos de usuario</h5>
                     </div>
                     <div class="card-body">
-                        <form action="/guardar_personas" method="POST">
-                            <label>Nº Cedula</label>
-                            <input type="text" class="form-control mb-3" name="id">
-                            <label>Nombre</label>
-                            <input type="text" class="form-control mb-3" name="nombre">
-                            <label>Apellido</label>
-                            <input type="text" class="form-control mb-3" name="apellido">
-                            <label>Telefono</label>
-                            <input type="text" class="form-control mb-3" name="telefono">
-                            <label>Cargo</label>
-                            <input type="text" class="form-control mb-3" name="cargo">
-                            <label>Sexo</label>
-                            <input type="text" class="form-control mb-3" name="sexo">
-                            <button class="btn btn-primary" type="submit">Guardar</button>
-                        </form>
-                    </div>
+                        <h2>Actividades</h2>
+            <form class="registros" action="/guardar_perfiles" method="post">
+                <div class="mb-3">
+                    <label for="cc" class="form-label">CC</label>
+                    <input type="text" class="form-control" id="cc" name="cc" required>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="text-center">Perfil De Usuario</h5>
-                        <div class="card-body">
-                            <ul class="list-group">
-                                <div class="row row-col-1 row-cols-sm-1 row-cols-md-2 row cols-lg-2">
-                                    <section class="box">
-                                        <img src="static/img/16.png" width="180" alt="" class="box-img">
-                                    </section>
-                                    {% for persona in personas %}
-                                        <div class="col">
-                                            <li class="list-group-item mb-3">
-                                                <form action="/editar_persona/{{ persona.id }}" method="POST">
-                                                    <small>Nº Ceduda</small>
-                                                    <input type="text" class="form-control" value="{{ persona.id }}" name="id">
-                                                    <small>Nombre</small>
-                                                    <input type="text" class="form-control" value="{{ persona.nombre }}" name="nombre">
-                                                    <small>Apellido</small>
-                                                    <input type="text" class="form-control" value="{{ persona.apellido }}" name="apellido">
-                                                    <small>Telefono</small>
-                                                    <input type="text" class="form-control" value="{{ persona.telefono }}" name="telefono">
-                                                    <small>Cargo</small>
-                                                    <input type="text" class="form-control" value="{{ persona.cargo }}" name="cargo">
-                                                    <small>Sexo</small>
-                                                    <input type="text" class="form-control" value="{{ persona.sexo }}" name="sexo">
-                                                    <button class="btn btn-primary btn-sm" type="submit">Editar</button>
-                                                    <a href="{{ url_for('eliminar', id_persona = persona.id) }}" class="btn btn-danger btn-sm">Eliminar</a>
-                                                    
-                                                </form>
-                                            </li>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </ul>
-                        </div>
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                </div>
+                <div class="mb-3">
+                    <label for="apellido" class="form-label">Apellido</label>
+                    <input type="text" class="form-control" id="apellido" name="apellido" required>
+                </div>
+                <div class="mb-3">
+                    <label for="telefono" class="form-label">Teléfono</label>
+                    <input type="text" class="form-control" id="telefono" name="telefono" required>
+                </div>
+                <div class="mb-3">
+                    <label for="cargo" class="form-label">Cargo</label>
+                    <select class="form-select" id="cargo" name="cargo">
+                        <option value="desarrolladores">Desarrollo</option>
+                        <option value="administradores de bases de datos">Administración de bases de datos</option>
+                        <option value="devops">Dev-ops</option>
+                        <option value="analistas">Análisis</option>
+                        <option value="Seguridad">Seguridad</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="sexo" class="form-label">Sexo</label>
+                    <input type="text" class="form-control" id="sexo" name="sexo" required>
+                </div>
+                <button type="submit" class="btn btn-success">Enviar</button>
+            </form>
                     </div>
                 </div>
             </div>

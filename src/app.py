@@ -2,6 +2,7 @@ from flask import Flask, redirect, render_template, request, url_for
 from config import *
 from user import User
 from admin import Admin
+from perfil import Perfil
 
 # Instancias para realizar operaciones con la DB
 con_bd = Conexion()
@@ -18,21 +19,41 @@ def index():
 def nosotros():
     return render_template('nosotros.html')
 
-#Ruta sobre nosotros
+
 @app.route('/perfil')
-def perfil():
-    return render_template('Perfil.html')
+def CrearPerfil():
+    perfiles= con_bd['Perfiles']
+    PerfilesRegistradas=perfiles.find()
+    return render_template('Perfil.html', perfiles= PerfilesRegistradas)
+
+#Ruta para guardar nuevos perfiles de usuario
+@app.route('/guardar_perfiles', methods = ['POST'])
+def Crearperfiles():
+    perfiles= con_bd['Perfiles']
+    cc = request.form['cc']
+    nombre = request.form['nombre']
+    apellido = request.form['apellido']
+    telefono = request.form['telefono']
+    cargo= request.form['cargo']
+    sexo= request.form['sexo']
+
+
+    if cc and nombre and apellido and telefono and cargo and sexo:
+        user = Perfil(cc, nombre, apellido, telefono, cargo, sexo)
+        perfiles.insert_one(user.formato_doc())
+        return redirect(url_for('CrearPerfil'))
+    else:
+        return "Error"
 
 # Crear usuario
 @app.route('/registro')
 def registro():
-    # Se modifica la vista index para poder hacer el muestreo de los datos
     usuarios = con_bd['Usuarios']
     UsuariosRegistradas=usuarios.find()
     return render_template('registro.html', usuarios = UsuariosRegistradas)
 
 
-# Ruta para guardar los datos de la DB
+# Ruta para guardar los usuarios nuevos en la DB
 @app.route('/guardar_usuarios', methods = ['POST'])
 def agregarUser():
     usuarios = con_bd['Usuarios']
