@@ -18,6 +18,11 @@ def index():
 def nosotros():
     return render_template('nosotros.html')
 
+#Ruta sobre nosotros
+@app.route('/perfil')
+def perfil():
+    return render_template('Perfil.html')
+
 # Crear usuario
 @app.route('/registro')
 def registro():
